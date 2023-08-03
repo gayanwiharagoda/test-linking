@@ -7,6 +7,18 @@
   <h1>Load Index File in Iframe</h1>
   
   <!-- The iframe element -->
+  <p> Iframe </p>
   <iframe src="content.html" width="800" height="600" frameborder="0"></iframe>
+
+  <p> no iframe </p>
+  <a id="appLink" target="_top" href="intent://api/one_purchase_flow_app_bff/handover?token=[REDACTED]&opf_session=52f08efd-caa0-4d71-9020-a6bbba7f9736&market=SE&login_hint=&merchant=issuing-acquiring-validations&app_handover=true#Intent;scheme=klarna;package=com.myklarnamobile;end"> actual link</a>
+  <button onclick="navigateToApp()">Go to App</button>
+
+  <script>
+    function navigateToApp() {
+      var appLink = document.getElementById('appLink');
+      appLink.click();
+    }
+  </script>
 </body>
 </html>
