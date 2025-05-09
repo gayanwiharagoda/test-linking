@@ -11,16 +11,24 @@
   <iframe src="content.html" width="800" height="600" frameborder="0"></iframe>
 
   <p> no iframe </p>
-  <a id="appLink" target="_top" href="intent://settings/contact-details?token=[REDACTED]&opf_session=66ca71d4-a25a-4193-a31d-555cf2c76cf7&market=SE&login_hint=&merchant=issuing-acquiring-validations&app_handover=true#Intent;scheme=klarna;package=com.myklarnamobile;end"> actual link</a>
-  <button onclick="navigateToApp()">Go to App</button>
+  <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end"> actual link</a>
+  <button onclick="navigateToApp()">Go to App in android</button>
 
   <p> direct univesal link </p>
   <a href="https://payments.klarna.com/opf/latest/app/">click on universal link</a>
+
+  <button onclick="openAppOnButonClickKlarna()">Open app on button click</button>
+
 
   <script>
     function navigateToApp() {
       var appLink = document.getElementById('appLink');
       appLink.click();
+    }
+
+    function openAppOnButonClickKlarna() {
+      // This must be triggered by user gesture (like button click)
+      window.location.href = "https://payments.klarna.com/opf/latest/app/";
     }
   </script>
 </body>
