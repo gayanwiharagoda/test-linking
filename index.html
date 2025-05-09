@@ -2,23 +2,32 @@
 <html>
 <head>
   <title>Load Index File in Iframe</title>
+  <style>
+    #env {
+      font-weight: bold;
+      color: green;
+      margin-bottom: 1em;
+    }
+  </style>
 </head>
 <body>
   <h1>Load Index File in Iframe</h1>
-  
+
+  <!-- Environment Info -->
+  <p>Environment: <span id="env">Detecting...</span></p>
+
   <!-- The iframe element -->
-  <p> Iframe </p>
+  <p>Iframe</p>
   <iframe src="content.html" width="800" height="600" frameborder="0"></iframe>
 
-  <p> no iframe </p>
-  <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end"> actual link</a>
-  <button onclick="navigateToApp()">Go to App in android</button>
+  <p>No iframe</p>
+  <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">Actual link</a>
+  <button onclick="navigateToApp()">Go to App in Android</button>
 
-  <p> direct univesal link </p>
-  <a href="https://payments.klarna.com/opf/latest/app/">click on universal link</a>
+  <p>Direct Universal Link</p>
+  <a href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
 
   <button onclick="openAppOnButonClickKlarna()">Open app on button click</button>
-
 
   <script>
     function navigateToApp() {
@@ -27,9 +36,34 @@
     }
 
     function openAppOnButonClickKlarna() {
-      // This must be triggered by user gesture (like button click)
       window.location.href = "https://payments.klarna.com/opf/latest/app/";
     }
+
+    function detectEnvironment() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isIOS = /iPad|iPhone|iPod/.test(ua);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+      const isWKWebView = (window.webkit && window.webkit.messageHandlers) && !window.navigator.standalone;
+      const isAndroidWebView = /\bwv\b/.test(ua) || /; wv/.test(ua);
+
+      let env = "Unknown";
+
+      if (isSafari && isIOS) {
+        env = "Safari Browser";
+      } else if (isWKWebView) {
+        env = "WKWebView (iOS in-app browser)";
+      } else if (isIOS && !isSafari) {
+        env = "Likely SFSafariViewController";
+      } else if (isAndroidWebView) {
+        env = "Android WebView";
+      } else if (/Chrome\/[.0-9]* Mobile/.test(ua)) {
+        env = "Chrome Mobile Browser";
+      }
+
+      document.getElementById("env").textContent = env;
+    }
+
+    detectEnvironment();
   </script>
 </body>
 </html>
