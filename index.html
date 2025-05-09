@@ -3,10 +3,74 @@
 <head>
   <title>Load Index File in Iframe</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
     #env {
       font-weight: bold;
       color: green;
       margin-bottom: 1em;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    iframe {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .styled-container {
+      margin-top: 20px;
+    }
+
+    .styled-link,
+    .styled-button,
+    #appLink,
+    button {
+      display: block;
+      margin: 10px auto;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 6px;
+      width: 250px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .styled-link,
+    #appLink {
+      background-color: #007bff;
+      color: white;
+      border: 1px solid #007bff;
+    }
+
+    .styled-link:hover,
+    #appLink:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .styled-button,
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .styled-button:hover,
+    button:hover {
+      background-color: #218838;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
@@ -18,14 +82,16 @@
 
   <!-- The iframe element -->
   <p>Iframe</p>
-  <iframe src="content.html" width="800" height="600" frameborder="0"></iframe>
+  <iframe src="content.html" width="800" height="600"></iframe>
 
   <p>No iframe</p>
-  <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">Actual link</a>
+  <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">
+    Open Klarna App (Intent URL)
+  </a>
   <button onclick="navigateToApp()">Go to App in Android</button>
 
   <p>Direct Universal Link</p>
-  <a href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
+  <a class="styled-link" href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
 
   <button onclick="openAppOnButonClickKlarna()">Open app on button click</button>
 
