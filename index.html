@@ -27,9 +27,7 @@
       margin-top: 20px;
     }
 
-    .styled-link,
-    .styled-button,
-    #appLink,
+    a,
     button {
       display: block;
       margin: 10px auto;
@@ -39,24 +37,21 @@
       text-align: center;
       text-decoration: none;
       border-radius: 6px;
-      width: 250px;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
+      width: 280px;
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
     }
 
-    .styled-link,
-    #appLink {
+    a {
       background-color: #007bff;
       color: white;
       border: 1px solid #007bff;
     }
 
-    .styled-link:hover,
-    #appLink:hover {
+    a:hover {
       background-color: #0056b3;
       border-color: #0056b3;
     }
 
-    .styled-button,
     button {
       background-color: #28a745;
       color: white;
@@ -64,7 +59,6 @@
       cursor: pointer;
     }
 
-    .styled-button:hover,
     button:hover {
       background-color: #218838;
     }
@@ -88,21 +82,29 @@
   <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">
     Open Klarna App (Intent URL)
   </a>
+
   <button onclick="navigateToApp()">Go to App in Android</button>
 
   <p>Direct Universal Link</p>
-  <a class="styled-link" href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
+  <a href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
 
-  <button onclick="openAppOnButonClickKlarna()">Open app on button click</button>
+  <button onclick="openAppOnButtonClickKlarna()">Open app on button click</button>
+
+  <button onclick="delayedOpenApp()">Open app with delay</button>
 
   <script>
     function navigateToApp() {
-      var appLink = document.getElementById('appLink');
-      appLink.click();
+      document.getElementById('appLink').click();
     }
 
-    function openAppOnButonClickKlarna() {
+    function openAppOnButtonClickKlarna() {
       window.location.href = "https://payments.klarna.com/opf/latest/app/";
+    }
+
+    function delayedOpenApp() {
+      setTimeout(() => {
+        window.location.href = "https://payments.klarna.com/opf/latest/app/";
+      }, 500); // Delay in ms
     }
 
     function detectEnvironment() {
