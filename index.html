@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Load Index File in Iframe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
+      margin: 0;
+      box-sizing: border-box;
     }
 
     #env {
@@ -16,29 +20,40 @@
 
     h1 {
       color: #333;
+      text-align: center;
     }
 
     iframe {
       border: 1px solid #ccc;
       border-radius: 8px;
+      width: 100%;
+      max-width: 100%;
+      height: 60vh;
     }
 
     .styled-container {
       margin-top: 20px;
     }
 
+    .button-container {
+      max-width: 400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     a,
     button {
-      display: block;
-      margin: 10px auto;
       padding: 12px 24px;
       font-size: 16px;
       font-weight: bold;
       text-align: center;
       text-decoration: none;
       border-radius: 6px;
-      width: 280px;
       transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     a {
@@ -66,31 +81,46 @@
     button:active {
       transform: scale(0.98);
     }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 20px;
+      }
+
+      iframe {
+        height: 300px;
+      }
+
+      a, button {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>Load Index File in Iframe</h1>
 
-  <!-- Environment Info -->
   <p>Environment: <span id="env">Detecting...</span></p>
 
-  <!-- The iframe element -->
   <p>Iframe</p>
-  <iframe src="content.html" width="800" height="600"></iframe>
+  <iframe src="content.html"></iframe>
 
   <p>No iframe</p>
-  <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">
-    Open Klarna App (Intent URL)
-  </a>
+  <div class="button-container">
+    <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">
+      Open Klarna App (Intent URL)
+    </a>
 
-  <button onclick="navigateToApp()">Go to App in Android</button>
+    <button onclick="navigateToApp()">Go to App in Android</button>
 
-  <p>Direct Universal Link</p>
-  <a href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
+    <p>Direct Universal Link</p>
+    <a href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
 
-  <button onclick="openAppOnButtonClickKlarna()">Open app on button click</button>
+    <button onclick="openAppOnButtonClickKlarna()">Open app on button click</button>
 
-  <button onclick="delayedOpenApp()">Open app with delay</button>
+    <button onclick="delayedOpenApp()">Open app with delay</button>
+  </div>
 
   <script>
     function navigateToApp() {
@@ -106,7 +136,6 @@
         window.location.href = "https://payments.klarna.com/opf/latest/app/";
       }, 500); // Delay in ms
     }
-
 
     function checkAutomaticHandover() {
       const params = new URLSearchParams(window.location.search);
