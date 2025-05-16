@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Load Index File in Iframe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
       margin: 0;
-      box-sizing: border-box;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 1rem;
     }
 
     #env {
       font-weight: bold;
       color: green;
-      margin-bottom: 1em;
+      text-align: center;
+      margin-bottom: 2rem;
+      display: block;
     }
 
-    h1 {
-      color: #333;
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      font-size: 1.2rem;
+      color: #444;
+      margin-bottom: 0.5rem;
       text-align: center;
     }
 
-    iframe {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      width: 100%;
-      max-width: 100%;
-      height: 60vh;
-    }
-
-    .styled-container {
-      margin-top: 20px;
-    }
-
     .button-container {
-      max-width: 400px;
+      max-width: 480px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      padding: 0 10px;
     }
 
     a,
     button {
+      display: block;
       padding: 12px 24px;
       font-size: 16px;
       font-weight: bold;
@@ -53,7 +62,6 @@
       border-radius: 6px;
       transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
       width: 100%;
-      box-sizing: border-box;
     }
 
     a {
@@ -82,6 +90,16 @@
       transform: scale(0.98);
     }
 
+    iframe {
+      width: 100%;
+      max-width: 100%;
+      height: 60vh;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 20px;
@@ -100,27 +118,34 @@
 </head>
 <body>
   <h1>Load Index File in Iframe</h1>
+  <span id="env">Detecting...</span>
 
-  <p>Environment: <span id="env">Detecting...</span></p>
+  <!-- Section: Universal Link -->
+  <section>
+    <h2>Direct Universal Link</h2>
+    <div class="button-container">
+      <a href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
+      <button onclick="openAppOnButtonClickKlarna()">Open app on button click</button>
+      <button onclick="delayedOpenApp()">Open app with delay</button>
+    </div>
+  </section>
 
-  <p>Iframe</p>
-  <iframe src="content.html"></iframe>
+  <!-- Section: Intent (No Iframe) -->
+  <section>
+    <h2>No Iframe / Android Intent</h2>
+    <div class="button-container">
+      <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">
+        Open Klarna App in Android (Intent URL)
+      </a>
+      <button onclick="navigateToApp()">Go to App in Android</button>
+    </div>
+  </section>
 
-  <p>No iframe</p>
-  <div class="button-container">
-    <a id="appLink" target="_top" href="intent://opf/latest/app/#Intent;scheme=klarna;package=com.myklarnamobile;end">
-      Open Klarna App (Intent URL)
-    </a>
-
-    <button onclick="navigateToApp()">Go to App in Android</button>
-
-    <p>Direct Universal Link</p>
-    <a href="https://payments.klarna.com/opf/latest/app/">Click on Universal Link</a>
-
-    <button onclick="openAppOnButtonClickKlarna()">Open app on button click</button>
-
-    <button onclick="delayedOpenApp()">Open app with delay</button>
-  </div>
+  <!-- Section: Iframe -->
+  <section>
+    <h2>Iframe</h2>
+    <iframe src="content.html" title="App Content Iframe"></iframe>
+  </section>
 
   <script>
     function navigateToApp() {
