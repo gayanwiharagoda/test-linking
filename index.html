@@ -104,7 +104,15 @@
     function delayedOpenApp() {
       setTimeout(() => {
         window.location.href = "https://payments.klarna.com/opf/latest/app/";
-      }, 5000); // Delay in ms
+      }, 500); // Delay in ms
+    }
+
+
+    function checkAutomaticHandover() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("automatic_handover") === "true") {
+        delayedOpenApp();
+      }
     }
 
     function detectEnvironment() {
@@ -132,6 +140,7 @@
     }
 
     detectEnvironment();
+    checkAutomaticHandover();
   </script>
 </body>
 </html>
